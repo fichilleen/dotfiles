@@ -1,0 +1,176 @@
+#############################
+# Command aliases
+#############################
+
+myip=`ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}'`
+
+# ls aliases
+alias l='ls -Fogh --color=auto'
+alias ls='ls -F --color=auto'
+alias ll='ls -Flh --color=auto'
+alias la='ls -lA'
+alias lft='ls -l --time-style=full-iso'
+alias lt='ls -lt'
+alias ltr='ls -ltr'
+alias lss='ls -lS'
+
+# Commonly strung functions
+alias tp='top -u `whoami`'
+alias tg='top -p `pgrep $1`'
+# Get user@host:path for pwd for scping to
+alias sp="echo `whoami`@`ifconfig  | grep -m1 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`:\`pwd\`"
+# Get user@host:path for pwd for scping from
+spp(){echo `whoami`@`ifconfig  | grep -m1 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`:`pwd`/$1}
+#alias sp="echo `whoami`@`ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}'`:\`pwd\`"
+alias sz='source ~/.zshrc'
+f() { pgrepOut=`pgrep $1`; lsof -p $pgrepOut }
+pk(){ pkill $1 ; echo $?}
+# Check another user's proccesses
+psu(){ ps -u $1 -U $1 u }
+
+vdc(){ vimdiff <( $1 $2 ) <( $1 $3) } 
+
+alias xf='tar xf'
+
+# -B flag stops .pyc files being created. Methinks them ugly
+alias py='python2.7 -B'
+alias py3='python3 -B'
+alias py32='python3.2 -B'
+alias dpyc='rm -v **/*.pyc'
+
+# vim / vim zsh files
+alias v='vim'
+alias vd='vimdiff'
+alias vz='vim ~/.zshrc'
+alias va='vim ~/dotfiles/.zaliases'
+alias ve='vim ~/dotfiles/.zenviroment'
+alias vh='vim ~/.zhistory'
+alias vv='vim ~/dotfiles/.vimrc'
+
+# git stuff
+alias gp='git pull'
+
+alias po='popd'
+alias pd='pushd'
+
+alias _='sudo'
+alias fucking='sudo'
+alias p='ps ux'
+
+#zhead(){args="$@"; for x in $args; do; zcat $x | head ; done}
+#zhead(){ for x in `ls $1`; do; zcat $x | head ; done}
+
+pp(){echo `pwd`/$1}
+lg(){ls -lh *$1*}
+
+xrpm(){for x in `ls *rpm`; do rpm2cpio $x | cpio -idm ; mkdir -p extract/`basename $x` ; mv opt extract/`basename $x` ; done}
+
+pu(){cd ~/dotfiles ; git commit -am $1 ; git push ; popd}
+alias pc='cd ~/dotfiles ; git pull ; source .zshrc ; popd' # Pull changes
+
+symb(){zcat $1 | cut -d'|' -f2 | sort | uniq -c | sort -rn | less}
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias x='chmod +x'
+
+# This one's for people that use my workstation, and type vim. I hate that.
+alias vi=vim
+alias ud="cvs update -d"
+
+#############################
+# zshell / keyboard aliases
+#############################
+
+# Alt + x for last param
+bindkey '\e.' insert-last-word
+
+# Meta-u to chdir to the parent directory
+bindkey -s '\eu' '^Ucd ..; ls^M'
+
+# If AUTO_PUSHD is set, Meta-p pops the dir stack
+bindkey -s '\ep' '^Upopd ; dirs -v^M'
+
+# Pipe the current command through less
+bindkey -s "\el" " 2>&1|less"
+
+alias '^L'=clear
+autoload -U compinit
+compinit
+
+alias -g NF='*(.om[1])'
+alias -g ND='*(/om[1])'
+
+bindkey -s '^z' 'fg^M'
+
+bindkey "^r" history-incremental-search-backward
+bindkey "^[[A" history-incremental-search-backward
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
+
+bindkey "^[[3~"     delete-char
+bindkey "^[3;5~"    delete-char
+bindkey ";5D"   backward-word
+bindkey "^[[5D"   backward-word
+bindkey ";5C"   forward-word
+bindkey "^[[5C"   forward-word
+bindkey "^[OF"  end-of-line
+bindkey "^[OH"  beginning-of-line
+
+# Shit for putty
+#bindkey "[1~" beginning-of-line
+#bindkey "[4~" end-of-line
+#bindkey "OD" backward-word
+#bindkey "OC" forward-word
+
+#############################
+# /zshell / keyboard aliases
+#############################
+
+#############################
+# Zshall command expansion
+#############################
+
+typeset -Ag abbreviations
+abbreviations=(
+  "gs"    '!!:gs/'
+  "fn"    "find -name"
+  "IF"    "find -iname"
+  "xc"	  "| xclip"
+  "Il"    "| less"
+  "Ia"    "| awk"
+  "Ig"    "| grep"
+  "If"    "| fgrep"
+  "Ih"    "| head"
+  "It"    "| tail"
+  "Is"    "| sort"
+  "Iv"    "| vim -"
+  "Iw"    "| wc -l"
+  "Ix"    "| xargs"
+  "Ii"    "> /tmp/scratchboard &"
+  "Io"    "\`cat /tmp/scratchboard\`"
+)
+
+magic-abbrev-expand() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[_a-zA-Z0-9]#}
+    LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+    zle self-insert
+}
+ 
+no-magic-abbrev-expand() {
+  LBUFFER+=' '
+}
+ 
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+#bindkey -M isearch " " self-insert
+#>bind '"\eOD": backwards-word'
+#>asd asd asd
+#>bind '"\eOD": backward-word'
