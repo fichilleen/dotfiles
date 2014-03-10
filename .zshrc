@@ -99,7 +99,9 @@ fi
 # Source alias file
 source ~/dotfiles/.zaliases
 # Source enviroment settings
-source ~/dotfiles/.zenviroment
+if [[ -e ~/dotfiles/.zenviroment ]]; then
+    source ~/dotfiles/.zenviroment
+fi
 
 #############################
 # Completion and that
