@@ -63,7 +63,7 @@ for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
 done
 
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
-PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_RED%~$PR_NO_COLOR%(1j. - %j job(s).)]
+PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_RED%~$PR_NO_COLOR%(1j. - %j job(s).)%(?.. ret %?)]
 %(!.#.$) "
 _RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M:%S})$PR_NO_COLOR"
 RPS1=${_RPS1}
