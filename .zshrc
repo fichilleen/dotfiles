@@ -28,6 +28,7 @@ SAVEHIST=10000000
 HOSTNAME="`hostname`"
 PAGER='less'
 TERM='xterm-256color'
+VISUAL='vim'
 EDITOR='vim'
 SHELL=`which zsh`
 READNULLCMD='less'
@@ -67,9 +68,11 @@ PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_RED%~$PR_NO_COLOR%(1j.
 %(!.#.$) "
 _RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M:%S})$PR_NO_COLOR"
 RPS1=${_RPS1}
-LC_ALL='en_US.UTF-8'
-LANG='en_US.UTF-8'
-LC_CTYPE=C
+#LC_ALL='en_US.UTF-8'
+#LANG='en_US.UTF-8'
+#LC_CTYPE='en_US.UTF-8'
+#LANGUAGE='en_US.UTF-8'
+
 
 zle -N zle-line-init
 zle -N zle-keymap-select
@@ -99,8 +102,8 @@ fi
 # Source alias file
 source ~/dotfiles/.zaliases
 # Source enviroment settings
-if [[ -e ~/dotfiles/.zenviroment ]]; then
-    source ~/dotfiles/.zenviroment
+if [[ -e ~/dotfiles/.zenvironment ]]; then
+    source ~/dotfiles/.zenvironment
 fi
 
 #############################
@@ -165,9 +168,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs avahi-autoipd\
         avahi backup messagebus beagleindex debian-tor dhcp dnsmasq fetchmail\
         firebird gnats haldaemon hplip irc klog list man cupsys postfix\
-        proxy syslog www-data mldonkey sys snort\
-        condor\
-        connorb # Too similar to config
+        proxy syslog www-data mldonkey sys snort kamailio
 
 # SSH Completion
 zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
