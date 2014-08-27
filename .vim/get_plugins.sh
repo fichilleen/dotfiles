@@ -27,7 +27,7 @@ git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/scrooloose/syntastic.git
 
 # powerline
-get clone https://github.com/Lokaltog/vim-powerline
+git clone https://github.com/Lokaltog/vim-powerline
 
 
 # End of plugins
