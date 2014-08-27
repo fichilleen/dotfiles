@@ -80,7 +80,7 @@ endif
 
 
 if has("persistent_undo")
-  set undodir=/var/userspace/pauric/vim_changes
+  set undodir=~/vim_changes
   set undofile
 endif
 
