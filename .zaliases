@@ -76,7 +76,7 @@ alias egrep='egrep --color=auto'
 
 alias x='chmod +x'
 
-# This one's for people that use my workstation, and type vim. I hate that.
+# This one's for people that use my workstation, and type vi. I hate that.
 alias vi=vim
 alias ud="cvs update -d"
 
