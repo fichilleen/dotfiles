@@ -102,6 +102,8 @@ if &diff
     colorscheme slate
 endif
 
+set cursorline
+
 "autocmd InsertEnter * :set number
 "autocmd InsertLeave * :set relativenumber
 
@@ -173,6 +175,9 @@ vnoremap <Up> gk
 " Page up / page down to move through tabs
 nnoremap <leader><PageUp> :tabprevious<Cr>
 nnoremap <leader><PageDown> :tabnext<Cr>
+" Same with home/end for moving through buffers
+nnoremap <leader><Home> :bp<Cr>
+nnoremap <leader><End> :bN<Cr>
 
 " Leave insert mode by hitting jj
 inoremap jj <Esc>
@@ -213,7 +218,7 @@ let g:jedi#popup_on_dot = 0
 call pathogen#infect()
 
 let g:syntastic_python_checker = 'pyflakes'
-nnoremap <leader>z :SyntasticCheck<CR>
+nnoremap <leader>z :SyntasticToggle<CR>
 
 map <F4> :NERDTreeToggle<CR>
 
