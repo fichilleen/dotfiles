@@ -43,7 +43,7 @@ alias v='vim'
 alias vd='vimdiff'
 alias vz='vim ~/.zshrc'
 alias va='vim ~/dotfiles/.zaliases'
-alias ve='vim ~/dotfiles/.zenviroment'
+alias ve='vim ~/dotfiles/.zenvironment'
 alias vh='vim ~/.zhistory'
 alias vv='vim ~/dotfiles/.vimrc'
 
@@ -75,6 +75,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias x='chmod +x'
+
+# Typo I make constantly. Ag is "the silver searcher". Like ack-grep, but in C
+alias ah="ag"
 
 # This one's for people that use my workstation, and type vi. I hate that.
 alias vi=vim
@@ -136,7 +139,9 @@ bindkey "^[OH"  beginning-of-line
 #############################
 
 typeset -Ag abbreviations
+
 abbreviations=(
+  "rmm"   'rm *core*'
   "gs"    '!!:gs/'
   "fn"    "find -name"
   "IF"    "find -iname"
