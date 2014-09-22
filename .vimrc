@@ -191,6 +191,9 @@ nnoremap <space> :nohls<CR>
 " Move back to previous editing spot after using . to repeat command
 nmap . .`[
 
+" Yank to clipboard
+noremap <leader>y "*y
+
 set pastetoggle=<F2>
 map <F3> :set wrap!<cr>
 
