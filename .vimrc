@@ -97,8 +97,8 @@ set hls
 set noswapfile " I just hate them for some reason
 
 " Themes, I guess
-"let g:airline_powerline_fonts = 1
-"set t_Co=256
+let g:airline_powerline_fonts = 1
+set t_Co=256
 colorscheme wombat256
 if &diff
     colorscheme slate
@@ -203,10 +203,10 @@ set pastetoggle=<F2>
 map <F3> :set wrap!<cr>
 
 " unset mouse use. Don't really need a toggle - on or off per file is ok
-map <leader>m :set mouse-=a
+map <leader>m :set mouse-=a<Cr>
 
 " unset textwrapping - again, don't need a toggle
-map <leader>t :set tw=0
+map <leader>t :set tw=0<Cr>
 
 " Folding
 " let g:xml_syntax_folding=1
