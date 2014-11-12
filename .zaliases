@@ -60,6 +60,7 @@ alias p='ps ux'
 #zhead(){args="$@"; for x in $args; do; zcat $x | head ; done}
 #zhead(){ for x in `ls $1`; do; zcat $x | head ; done}
 
+mkcd(){mkdir -p $1; cd $1}
 pp(){echo `pwd`/$1}
 lg(){ls -lh *$1*}
 
