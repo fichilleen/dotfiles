@@ -97,17 +97,22 @@ set hls
 set noswapfile " I just hate them for some reason
 
 " Themes, I guess
+"let g:airline_powerline_fonts = 1
+"set t_Co=256
 colorscheme wombat256
 if &diff
     colorscheme slate
 endif
+
+"kill the delay between hitting esc, and changing mode
+set timeoutlen=1000 ttimeoutlen=0
 
 set cursorline
 
 "autocmd InsertEnter * :set number
 "autocmd InsertLeave * :set relativenumber
 
-set mouse-=a
+set mouse=a
 "set list "show whitespace
 
 "Plugin specific stuff
@@ -197,6 +202,12 @@ noremap <leader>y "*y
 set pastetoggle=<F2>
 map <F3> :set wrap!<cr>
 
+" unset mouse use. Don't really need a toggle - on or off per file is ok
+map <leader>m :set mouse-=a
+
+" unset textwrapping - again, don't need a toggle
+map <leader>t :set tw=0
+
 " Folding
 " let g:xml_syntax_folding=1
 " au FileType xml setlocal foldmethod=syntax
@@ -224,4 +235,3 @@ let g:syntastic_python_checker = 'pyflakes'
 nnoremap <leader>z :SyntasticToggle<CR>
 
 map <F4> :NERDTreeToggle<CR>
-
