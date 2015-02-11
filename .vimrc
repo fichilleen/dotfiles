@@ -10,7 +10,7 @@ if has ("autocmd")
     endif
 endif
 
-set cpoptions=BF
+set cpoptions=ABFP
 " When included, a ":write" command with a file name argument will set the file name for the current buffer,
 " if the current buffer doesn't have a file name yet.  Also see |cpo-P|.
 " 'B' is to stop cpoptions breaking vim
@@ -24,6 +24,8 @@ set tw=78 ts=4 sw=4 sta et sts=4 ai
 syntax enable
 "fix backspace:
 set backspace=indent,eol,start
+
+set nowrap
 
 set history=10000
 
@@ -219,6 +221,40 @@ nnoremap <F10> zR
 
 " List contents of all registers (that typically contain pasteable text).
 nnoremap <silent> "" :registers "0123456789abcdefghijklmnopqrstuvwxyz*+.<CR>
+
+
+" http://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim
+let s:comment_map = {
+    \   "c": '// ',
+    \   "cpp": '// ',
+    \   "erlang": '% ',
+    \   "go": '// ',
+    \   "java": '// ',
+    \   "javascript": '// ',
+    \   "php": '// ',
+    \   "python": '# ',
+    \   "ruby": '# ',
+    \   "tex": '% ',
+    \   "vim": '" ',
+    \ }
+
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+        if getline('.') =~ "^" . comment_leader
+            " Uncomment the line
+            execute "silent s/^" . comment_leader . "//"
+        else
+            " Comment the line
+            execute "silent s/^/" . comment_leader . "/"
+        endif
+    else
+        echo "No comment leader found for filetype"
+    end
+endfunction
+
+nnoremap <leader><Space> :call ToggleComment()<cr>
+vnoremap <leader><Space> :call ToggleComment()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
