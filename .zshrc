@@ -99,6 +99,9 @@ ulimit -c unlimited
 if [[ -e ~/.zsh_local ]]; then
     source ~/.zsh_local
 fi
+if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
+fi
 
 # Source alias file
 source ~/dotfiles/.zaliases
