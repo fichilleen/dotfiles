@@ -46,6 +46,7 @@ alias va='vim ~/dotfiles/.zaliases'
 alias ve='vim ~/dotfiles/.zenvironment'
 alias vh='vim ~/.zhistory'
 alias vv='vim ~/dotfiles/.vimrc'
+alias v3='vim ~/.i3/config'
 
 # git stuff
 alias gp='git pull'
