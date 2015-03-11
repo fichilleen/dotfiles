@@ -174,6 +174,10 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         firebird gnats haldaemon hplip irc klog list man cupsys postfix\
         proxy syslog www-data mldonkey sys snort kamailio
 
+# ignore users for cd/pushd
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+      'local-directories path-directories directory-stack' '*'
+
 # SSH Completion
 zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
