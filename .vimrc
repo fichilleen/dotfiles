@@ -1,4 +1,3 @@
-set nocompatible
 if has ("autocmd")
     if !exists("autocommands_loaded")
         let autocommands_loaded = 1
@@ -26,8 +25,9 @@ syntax enable
 set backspace=indent,eol,start
 
 set nowrap
-
 set history=10000
+" No right scrollbar, menubar, Toolbar
+set guioptions-=rmT
 
 set cindent
 set cinkeys=0{,0},!^F,o,O,e "
@@ -106,7 +106,7 @@ if &diff
     colorscheme slate
 endif
 
-"kill the delay between hitting esc, and changing mode
+"kill the delay between hitting esc, and displaying the mode change
 set timeoutlen=1000 ttimeoutlen=0
 
 set cursorline
@@ -118,10 +118,9 @@ set mouse=a
 "set list "show whitespace
 
 "Plugin specific stuff
-let g:pymode_folding = 0
-let g:pymode_lint = 0
+let g:pymode_folding = 1
+let g:pymode_lint = 1
 
-let g:fortune_vimtips_auto_display = 0
 
 function! MaximizeToggle()
   if exists("s:maximize_session")
@@ -204,8 +203,15 @@ noremap <leader>y "*y
 set pastetoggle=<F2>
 map <F3> :set wrap!<cr>
 
-" unset mouse use. Don't really need a toggle - on or off per file is ok
-map <leader>m :set mouse-=a<Cr>
+function! ToggleMouse()
+    if &mouse == "a"
+        set mouse-=a
+    else
+        set mouse+=a
+    endif
+endfunction
+
+map <leader>m :call ToggleMouse()<CR>
 
 " unset textwrapping - again, don't need a toggle
 map <leader>t :set tw=0<Cr>
@@ -262,12 +268,12 @@ vnoremap <leader><Space> :call ToggleComment()<cr>
 
 nnoremap <F5> :GundoToggle<CR>
 
-let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_on_dot = 0
 
 " Use pathogen, and associated plugins
 call pathogen#infect()
 
-let g:syntastic_python_checker = 'pyflakes'
+let g:syntastic_python_checkers = ['pyflakes']
 nnoremap <leader>z :SyntasticToggle<CR>
 
 map <F4> :NERDTreeToggle<CR>
