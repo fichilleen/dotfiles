@@ -87,7 +87,7 @@ function zle-line-init zle-keymap-select {
 unsetopt ALL_EXPORT
 alias man='LC_ALL=C LANG=C man'
 
-# You might say, since I work in QA, it always makes sense to have coredumps
+# No no, no no no no, no no no no, no no
 ulimit -c unlimited
 
 # fifo for use as a clipboard with associated aliases
@@ -102,6 +102,13 @@ fi
 if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
     source ~/.nix-profile/etc/profile.d/nix.sh
 fi
+
+# Eventually clean up the scripts that fetch packages and plugins. Will
+# eliminate this check
+if [[ -e ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source ~/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 
 # Source alias file
 source ~/dotfiles/.zaliases
@@ -190,3 +197,4 @@ __remote_commands=(scp rsync)
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 zstyle -e :urlglobber url-other-schema '[[ $__remote_commands[(i)$words[1]] -le ${#__remote_commands} ]] && reply=("*") || reply=(http https ftp)'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
